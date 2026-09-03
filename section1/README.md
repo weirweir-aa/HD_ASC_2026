@@ -30,6 +30,18 @@ pacman -S --noconfirm mingw-w64-ucrt-x86_64-gcc
 >
 > 2.换文件之后重新下载 如果有404报错可以先问ai这些报错的文件是不是必要的 如果不是就进入下一步
 
+> ​	更换清华镜像源
+>
+> > 在同一个 **MSYS2 UCRT64** 窗口里，逐行执行下面三条命令（把清华源加到各个镜像列表的最前面，原来的国外源会被跳过）：
+> >
+> > ```
+> > sed -i '1i Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/ucrt64'  /etc/pacman.d/mirrorlist.ucrt64
+> > sed -i '1i Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/mingw64' /etc/pacman.d/mirrorlist.mingw64
+> > sed -i '1i Server = https://mirrors.tuna.tsinghua.edu.cn/msys2/msys/\$arch'     /etc/pacman.d/mirrorlist.msys
+> > ```
+> >
+> > > 如果你更想用**阿里云**，把上面三个地址里的 `tuna.tsinghua.edu.cn` 换成 `mirrors.aliyun.com` 即可。想验证源有没有加对，可以执行 `cat /etc/pacman.d/mirrorlist.ucrt64` 看第一行是不是清华的地址。
+
 可选：这一步执行完可以直接在这个环境中直接编译和运行代码（见第四步）
 
 1.（如果有报错 可能也是权限问题 可以直接管理员身份运行）
